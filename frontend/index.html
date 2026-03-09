@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Sistema Cuentas por Cobrar</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+
+        <h2>CxC System</h2>
+
+        <ul>
+            <li onclick="cargar('dashboard')">Dashboard</li>
+            <li onclick="cargar('clientes')">Clientes</li>
+            <li onclick="cargar('documentos')">Tipos Documentos</li>
+            <li onclick="cargar('transacciones')">Transacciones</li>
+            <li onclick="cargar('asientos')">Asientos Contables</li>
+            <li onclick="cargar('consultas')">Consultas</li>
+        </ul>
+
+    </div>
+
+    <div class="main">
+
+        <div id="contenido">
+            <h1>Bienvenido al Sistema de Cuentas por Cobrar</h1>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

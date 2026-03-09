@@ -1,0 +1,47 @@
+body{
+    margin:0;
+    font-family:Arial;
+}
+
+.container{
+    display:flex;
+    height:100vh;
+}
+
+.sidebar{
+    width:220px;
+    background:#1f2937;
+    color:white;
+    padding:20px;
+}
+
+.sidebar h2{
+    text-align:center;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding:0;
+}
+
+.sidebar li{
+    padding:12px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.sidebar li:hover{
+    background:#374151;
+}
+
+.main{
+    flex:1;
+    background:#f3f4f6;
+    padding:30px;
+}
+
+#contenido{
+    background:white;
+    padding:20px;
+    border-radius:8px;
+}
