@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -7,10 +8,22 @@ body {
 .layout {
   display: flex;
   height: 100vh;
+=======
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f3f4f6;
+}
+
+.layout{
+display:flex;
+height:100vh;
+>>>>>>> 218e935fcfc32361d38f9f9ee34b7385f2bf8c02
 }
 
 /* SIDEBAR */
 
+<<<<<<< HEAD
 .sidebar {
   width: 230px;
   background: #111827;
@@ -37,32 +50,80 @@ body {
 
 .sidebar li:hover {
   background: #1f2937;
+=======
+.sidebar{
+width:230px;
+background:#111827;
+color:white;
+padding:20px;
+}
+
+.logo{
+text-align:center;
+margin-bottom:30px;
+}
+
+.sidebar ul{
+list-style:none;
+padding:0;
+}
+
+.sidebar li{
+padding:12px;
+margin-bottom:10px;
+cursor:pointer;
+border-radius:6px;
+}
+
+.sidebar li:hover{
+background:#1f2937;
+>>>>>>> 218e935fcfc32361d38f9f9ee34b7385f2bf8c02
 }
 
 /* MAIN */
 
+<<<<<<< HEAD
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
+=======
+.main{
+flex:1;
+display:flex;
+flex-direction:column;
+>>>>>>> 218e935fcfc32361d38f9f9ee34b7385f2bf8c02
 }
 
 /* HEADER */
 
+<<<<<<< HEAD
 .header {
   background: white;
   padding: 15px;
   border-bottom: 1px solid #ddd;
+=======
+.header{
+background:white;
+padding:15px;
+border-bottom:1px solid #ddd;
+>>>>>>> 218e935fcfc32361d38f9f9ee34b7385f2bf8c02
 }
 
 /* CONTENT */
 
+<<<<<<< HEAD
 .contenido {
   padding: 25px;
+=======
+.contenido{
+padding:25px;
+>>>>>>> 218e935fcfc32361d38f9f9ee34b7385f2bf8c02
 }
 
 /* DASHBOARD CARDS */
 
+<<<<<<< HEAD
 .cards {
   display: flex;
   gap: 20px;
@@ -95,3 +156,28 @@ body {
 .table-responsive {
   width: 100%;
 }
+=======
+.cards{
+display:flex;
+gap:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+width:200px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card h3{
+margin:0;
+font-size:18px;
+}
+
+.card p{
+font-size:28px;
+margin-top:10px;
+font-weight:bold;
+}
+>>>>>>> 218e935fcfc32361d38f9f9ee34b7385f2bf8c02
