@@ -1,34 +1,48 @@
 function cargar(seccion){
 
-    const contenido = document.getElementById("contenido");
+const contenido = document.getElementById("main")
 
-    if(seccion === "dashboard"){
-        contenido.innerHTML = "<h1>Dashboard</h1><p>Resumen del sistema</p>";
-    }
+if(seccion === "clientes"){
+contenido.innerHTML = "<h2>Gestión de Clientes</h2>"
+}
 
-    if(seccion === "clientes"){
-        // Verifica si cargó tu archivo y llama a tu función iniciar
-        if(typeof ClientesModulo !== 'undefined') {
-            ClientesModulo.cargarVista(); 
-        } else {
-            contenido.innerHTML = "<h2 style='color:red'>Error: El archivo clientes.js no está cargado.</h2>";
-        }
-    }
+if(seccion === "documentos"){
+contenido.innerHTML = "<h2>Tipos de Documento</h2>"
+}
 
-    if(seccion === "documentos"){
-        contenido.innerHTML = "<h1>Tipos de Documentos</h1>";
-    }
+if(seccion === "transacciones"){
+contenido.innerHTML = "<h2>Transacciones</h2>"
+}
 
-    if(seccion === "transacciones"){
-        contenido.innerHTML = "<h1>Transacciones</h1>";
-    }
+if(seccion === "asientos"){
+contenido.innerHTML = "<h2>Asientos Contables</h2>"
+}
 
-    if(seccion === "asientos"){
-        contenido.innerHTML = "<h1>Asientos Contables</h1>";
-    }
+if(seccion === "consultas"){
+contenido.innerHTML = "<h2>Consultas</h2>"
+}
 
-    if(seccion === "consultas"){
-        contenido.innerHTML = "<h1>Consultas</h1>";
-    }
+if(seccion === "dashboard"){
+contenido.innerHTML = `
+<div class="cards">
+
+<div class="card">
+<h3>Clientes</h3>
+<p>0</p>
+</div>
+
+<div class="card">
+<h3>Transacciones</h3>
+<p>0</p>
+</div>
+
+<div class="card">
+<h3>Balance</h3>
+<p>$0</p>
+</div>
+
+</div>
+`
+}
 
 }
