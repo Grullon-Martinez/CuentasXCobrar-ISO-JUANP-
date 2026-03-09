@@ -7,7 +7,12 @@ function cargar(seccion){
     }
 
     if(seccion === "clientes"){
-        contenido.innerHTML = "<h1>Gestión de Clientes</h1>";
+        // Verifica si cargó tu archivo y llama a tu función iniciar
+        if(typeof ClientesModulo !== 'undefined') {
+            ClientesModulo.cargarVista(); 
+        } else {
+            contenido.innerHTML = "<h2 style='color:red'>Error: El archivo clientes.js no está cargado.</h2>";
+        }
     }
 
     if(seccion === "documentos"){
