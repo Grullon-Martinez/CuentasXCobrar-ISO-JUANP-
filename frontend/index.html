@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-<<<<<<< HEAD
   <head>
     <meta charset="UTF-8" />
     <title>Sistema Cuentas por Cobrar</title>
@@ -29,25 +28,21 @@
 
         <section id="contenido" class="contenido">
           <div class="cards">
-            <div class="card">
+            <div class="dashboard-card">
               <h3>Clientes</h3>
-              <p id="totalClientes">0</p>
+              <p id="dash-clientes">0</p>
             </div>
 
             <div class="dashboard-card">
-                <h3>Clientes</h3>
-                <p id="totalClientes">0</p>
+              <h3>Transacciones</h3>
+              <p id="dash-transacciones">0</p>
             </div>
-            
+
             <div class="dashboard-card">
-                <h3>Transacciones</h3>
-                <p>0</p>
+              <h3>Balance</h3>
+              <p id="dash-balance">$0</p>
             </div>
-            
-            <div class="dashboard-card">
-                <h3>Balance</h3>
-                <p>$0</p>
-            </div>
+          </div>
         </section>
       </main>
     </div>
@@ -57,68 +52,3 @@
     <script src="transacciones.js"></script>
   </body>
 </html>
-=======
-
-<head>
-<meta charset="UTF-8">
-<title>Sistema Cuentas por Cobrar</title>
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<div class="layout">
-
-    <aside class="sidebar">
-        <h2 class="logo">CxC System</h2>
-
-        <ul>
-            <li onclick="cargar('dashboard')">Dashboard</li>
-            <li onclick="cargar('clientes')">Clientes</li>
-            <li onclick="cargar('documentos')">Tipos de Documento</li>
-            <li onclick="cargar('transacciones')">Transacciones</li>
-            <li onclick="cargar('asientos')">Asientos Contables</li>
-            <li onclick="cargar('consultas')">Consultas</li>
-        </ul>
-    </aside>
-
-    <main class="main">
-
-        <header class="header">
-            <h1>Sistema de Cuentas por Cobrar</h1>
-        </header>
-
-        <section id="contenido" class="contenido">
-
-            <div class="cards">
-
-                <div class="card">
-                    <h3>Clientes</h3>
-                    <p id="totalClientes">0</p>
-                </div>
-
-                <div class="card">
-                    <h3>Transacciones</h3>
-                    <p>0</p>
-                </div>
-
-                <div class="card">
-                    <h3>Balance</h3>
-                    <p>$0</p>
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-</div>
-
-<script src="app.js"></script>
-<script src="clientes.js"></script>
-
-
-</body>
-</html>
->>>>>>> 218e935fcfc32361d38f9f9ee34b7385f2bf8c02
