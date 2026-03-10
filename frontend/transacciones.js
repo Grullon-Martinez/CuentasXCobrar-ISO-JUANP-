@@ -1,14 +1,93 @@
 const TransaccionesModulo = {
-  indiceEdicion: -1,
+  iindiceEdicionModal: -1,
+
+  cargarClientesEnSelectModal: function (valorSeleccionado = "") {
+    const select = document.getElementById("editClienteId");
+    const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+
+    if (!select) return;
+
+    select.innerHTML = `<option value="">Seleccione un cliente</option>`;
+
+    clientes.forEach((cliente) => {
+      select.innerHTML += `<option value="${cliente.id}">${cliente.id} - ${cliente.nombre}</option>`;
+    });
+
+    select.value = valorSeleccionado;
+  },
+
+  abrirModalEditar: function (index) {
+    const transacciones =
+      JSON.parse(localStorage.getItem("transacciones")) || [];
+    const t = transacciones[index];
+
+    this.indiceEdicionModal = index;
+
+    document.getElementById("editTransId").value = t.id;
+    document.getElementById("editTipoMovimiento").value = t.tipoMovimiento;
+    document.getElementById("editTipoDocumento").value = t.tipoDocumento;
+    document.getElementById("editNumeroDocumento").value = t.numeroDocumento;
+    document.getElementById("editFecha").value = t.fecha;
+    document.getElementById("editMonto").value = t.monto;
+
+    this.cargarClientesEnSelectModal(t.clienteId);
+
+    const modal = new bootstrap.Modal(
+      document.getElementById("modalEditarTransaccion")
+    );
+    modal.show();
+  },
+
+  guardarEdicionModal: function () {
+    const transacciones =
+      JSON.parse(localStorage.getItem("transacciones")) || [];
+
+    if (this.indiceEdicionModal === -1) return;
+
+    const actualizada = {
+      id: document.getElementById("editTransId").value.trim(),
+      tipoMovimiento: document.getElementById("editTipoMovimiento").value,
+      tipoDocumento: document.getElementById("editTipoDocumento").value.trim(),
+      numeroDocumento: document
+        .getElementById("editNumeroDocumento")
+        .value.trim(),
+      fecha: document.getElementById("editFecha").value,
+      clienteId: document.getElementById("editClienteId").value,
+      monto: document.getElementById("editMonto").value,
+    };
+
+    if (!actualizada.clienteId) {
+      alert("Debe seleccionar un cliente.");
+      return;
+    }
+
+    if (parseFloat(actualizada.monto) <= 0) {
+      alert("El monto debe ser mayor que cero.");
+      return;
+    }
+
+    transacciones[this.indiceEdicionModal] = actualizada;
+    localStorage.setItem("transacciones", JSON.stringify(transacciones));
+
+    this.renderizarTabla();
+    actualizarDashboard();
+
+    const modalEl = document.getElementById("modalEditarTransaccion");
+    const modal = bootstrap.Modal.getInstance(modalEl);
+    if (modal) modal.hide();
+
+    this.indiceEdicionModal = -1;
+    alert("Transacción actualizada correctamente");
+  },
 
   html: `
       <div class="container-fluid fade-in" style="padding: 20px;">
         <h2 class="text-dark mb-4 border-bottom pb-2">Gestión de Transacciones</h2>
   
         <div class="card shadow-sm mb-4">
-          <div class="card-header bg-success text-white">
-            <h5 class="mb-0" id="titulo-form-transaccion">Registro de Nueva Transacción</h5>
-          </div>
+          <div class="card-header header-sistema text-white">
+                Registrar nueva transacción
+                </div>
           <div class="card-body">
             <form onsubmit="TransaccionesModulo.guardar(event)">
               <div class="row">
@@ -100,6 +179,62 @@ const TransaccionesModulo = {
           </div>
         </div>
       </div>
+      <!-- Modal Editar Transacción -->
+<div class="modal fade" id="modalEditarTransaccion" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header header-sistema text-white">
+        <h5 class="modal-title">Editar Transacción</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formEditarTransaccion">
+          <div class="mb-3">
+            <label class="form-label">Identificador de Transacción</label>
+            <input type="text" id="editTransId" class="form-control" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Tipo de Movimiento</label>
+            <select id="editTipoMovimiento" class="form-select" required>
+              <option value="DB">DB - Débito</option>
+              <option value="CR">CR - Crédito</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Identificador Tipo Documento</label>
+            <input type="text" id="editTipoDocumento" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Número de Documento</label>
+            <input type="text" id="editNumeroDocumento" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Fecha</label>
+            <input type="date" id="editFecha" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Cliente</label>
+            <select id="editClienteId" class="form-select" required></select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Monto</label>
+            <input type="number" id="editMonto" class="form-control" step="0.01" min="0.01" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-sistema" onclick="TransaccionesModulo.guardarEdicionModal()">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
     `,
 
   cargarVista: function () {
@@ -289,11 +424,11 @@ const TransaccionesModulo = {
               minimumFractionDigits: 2,
             })}</td>
             <td class="text-center">
-              <button onclick="TransaccionesModulo.editar(${index})" class="btn btn-sm btn-outline-primary me-2">
-                ✏️ Editar
-              </button>
+              <button onclick="TransaccionesModulo.abrirModalEditar(${index})" class="btn btn-sm btn-outline-primary me-2">
+  Editar
+</button>
               <button onclick="TransaccionesModulo.eliminar(${index})" class="btn btn-sm btn-outline-danger">
-                🗑️ Eliminar
+                Eliminar
               </button>
             </td>
           </tr>

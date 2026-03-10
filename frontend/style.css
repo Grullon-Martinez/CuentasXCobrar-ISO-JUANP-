@@ -88,3 +88,8 @@ body {
 .table-responsive {
   width: 100%;
 }
+
+.header-sistema {
+  background-color: #111827 !important;
+  color: white;
+}
