@@ -6,7 +6,7 @@ function cargar(seccion) {
   }
 
   if (seccion === "documentos") {
-    contenido.innerHTML = "<h2>Tipos de Documento</h2>";
+    DocumentosModulo.cargarVista();
   }
 
   if (seccion === "transacciones") {
