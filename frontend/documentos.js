@@ -21,7 +21,7 @@ const DocumentosModulo = {
 
                             <div class="col-md-3 mb-3">
                                 <label class="form-label fw-bold">Identificador</label>
-                                <input type="text" id="doc-id" class="form-control" placeholder="FAC" required>
+                                <input type="text" id="doc-id" class="form-control" placeholder="FAC,NCF,REC" required>
                             </div>
 
                             <div class="col-md-4 mb-3">
