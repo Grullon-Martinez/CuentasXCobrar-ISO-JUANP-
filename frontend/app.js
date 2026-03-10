@@ -14,7 +14,7 @@ function cargar(seccion) {
   }
 
   if (seccion === "asientos") {
-    contenido.innerHTML = "<h2>Asientos Contables</h2>";
+    AsientosModulo.cargarVista();
   }
 
   if (seccion === "consultas") {
