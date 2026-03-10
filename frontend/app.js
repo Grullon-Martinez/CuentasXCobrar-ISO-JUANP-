@@ -17,10 +17,6 @@ function cargar(seccion) {
     AsientosModulo.cargarVista();
   }
 
-  if (seccion === "consultas") {
-    contenido.innerHTML = "<h2>Consultas</h2>";
-  }
-
   if (seccion === "dashboard") {
     contenido.innerHTML = `
       <div class="cards">
