@@ -86,7 +86,7 @@ const TransaccionesModulo = {
   
         <div class="card shadow-sm mb-4">
           <div class="card-header header-sistema text-white">
-                Registrar nueva transacción
+                <h5 class="mb-0">Registrar nueva transacción</h5>
                 </div>
           <div class="card-body">
             <form onsubmit="TransaccionesModulo.guardar(event)">
