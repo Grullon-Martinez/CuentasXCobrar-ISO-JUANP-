@@ -2,47 +2,80 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Sistema Cuentas por Cobrar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cuentas por Cobrar | Sistema de Gestión</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
 
   <body>
     <div class="layout">
       <aside class="sidebar">
-        <h2 class="logo">CxC System</h2>
+        <div class="sidebar-brand">
+          <div class="sidebar-brand-icon">
+            <i class="fas fa-file-invoice-dollar"></i>
+          </div>
+          <div class="sidebar-brand-text">
+            <span class="sidebar-brand-title">Cuentas por Cobrar</span>
+            <span class="sidebar-brand-subtitle">Sistema de Gestión</span>
+          </div>
+        </div>
 
-        <ul>
-          <li onclick="cargar('dashboard')">Dashboard</li>
-          <li onclick="cargar('clientes')">Clientes</li>
-          <li onclick="cargar('documentos')">Tipos de Documento</li>
-          <li onclick="cargar('transacciones')">Transacciones</li>
-          <li onclick="cargar('asientos')">Asientos Contables</li>
-          <li onclick="cargar('consultas')">Consultas</li>
-        </ul>
+        <nav class="sidebar-nav">
+          <ul>
+            <li class="nav-item active" data-section="dashboard" onclick="cargar('dashboard')">
+              <i class="fas fa-chart-line"></i>
+              <span>Dashboard</span>
+            </li>
+            <li class="nav-item" data-section="clientes" onclick="cargar('clientes')">
+              <i class="fas fa-users"></i>
+              <span>Clientes</span>
+            </li>
+            <li class="nav-item" data-section="documentos" onclick="cargar('documentos')">
+              <i class="fas fa-file-alt"></i>
+              <span>Tipos de Documento</span>
+            </li>
+            <li class="nav-item" data-section="transacciones" onclick="cargar('transacciones')">
+              <i class="fas fa-exchange-alt"></i>
+              <span>Transacciones</span>
+            </li>
+            <li class="nav-item" data-section="asientos" onclick="cargar('asientos')">
+              <i class="fas fa-book"></i>
+              <span>Asientos Contables</span>
+            </li>
+            <li class="nav-item" data-section="consultas" onclick="cargar('consultas')">
+              <i class="fas fa-search"></i>
+              <span>Consultas</span>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="sidebar-footer-line"></div>
+          <span class="sidebar-version">v1.0</span>
+        </div>
       </aside>
 
       <main class="main">
         <header class="header">
-          <h1>Sistema de Cuentas por Cobrar</h1>
+          <div class="header-left">
+            <h1 class="header-title" id="header-title">Dashboard</h1>
+            <p class="header-subtitle" id="header-subtitle">Resumen general del sistema</p>
+          </div>
+          <div class="header-right">
+            <div class="header-date">
+              <i class="fas fa-calendar-alt"></i>
+              <span id="header-fecha"></span>
+            </div>
+          </div>
         </header>
 
         <section id="contenido" class="contenido">
-          <div class="cards">
-            <div class="dashboard-card">
-              <h3>Clientes</h3>
-              <p id="dash-clientes">0</p>
-            </div>
-
-            <div class="dashboard-card">
-              <h3>Transacciones</h3>
-              <p id="dash-transacciones">0</p>
-            </div>
-
-            <div class="dashboard-card">
-              <h3>Balance</h3>
-              <p id="dash-balance">$0</p>
-            </div>
+          <div class="section-page" style="max-width:1200px;">
+            <p class="text-muted">Cargando...</p>
           </div>
         </section>
       </main>
@@ -51,7 +84,7 @@
     <script src="clientes.js"></script>
     <script src="transacciones.js"></script>
     <script src="documentos.js"></script>
-    <script src="asientos.js"></script> 
+    <script src="asientos.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
