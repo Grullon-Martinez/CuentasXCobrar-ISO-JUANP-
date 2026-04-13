@@ -1,7 +1,26 @@
 {
+  "name": "cuentas-x-cobrar-iso-juanp",
+  "version": "1.0.0",
+  "description": "API para el sistema de cuentas x cobrar",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "api",
+    "cuentas x cobrar",
+    "iso",
+    "juanp"
+  ],
+  "author": "Juan Pablo Perez",
+  "license": "ISC",
   "dependencies": {
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "mysql2": "^3.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
