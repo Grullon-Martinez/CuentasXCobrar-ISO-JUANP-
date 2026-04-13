@@ -1,10 +1,22 @@
 const SECCIONES = {
   dashboard: { title: "Dashboard", subtitle: "Resumen general del sistema" },
-  clientes: { title: "Clientes", subtitle: "Gestión de clientes y límites de crédito" },
-  documentos: { title: "Tipos de Documento", subtitle: "Configuración de documentos" },
-  transacciones: { title: "Transacciones", subtitle: "Registro y consulta de movimientos" },
-  asientos: { title: "Asientos Contables", subtitle: "Libro diario y asientos" },
-  consultas: { title: "Consultas", subtitle: "Reportes y búsquedas" }
+  clientes: {
+    title: "Clientes",
+    subtitle: "Gestión de clientes y límites de crédito",
+  },
+  documentos: {
+    title: "Tipos de Documento",
+    subtitle: "Configuración de documentos",
+  },
+  transacciones: {
+    title: "Transacciones",
+    subtitle: "Registro y consulta de movimientos",
+  },
+  asientos: {
+    title: "Asientos Contables",
+    subtitle: "Libro diario y asientos",
+  },
+  consultas: { title: "Consultas", subtitle: "Reportes y búsquedas" },
 };
 
 function actualizarHeader(seccion) {
@@ -27,7 +39,7 @@ function actualizarFechaHeader() {
       weekday: "long",
       year: "numeric",
       month: "long",
-      day: "numeric"
+      day: "numeric",
     });
   }
 }
@@ -38,7 +50,9 @@ function getDashboardData() {
   const documentos = JSON.parse(localStorage.getItem("documentos")) || [];
   const asientos = JSON.parse(localStorage.getItem("asientos")) || [];
 
-  let totalDebitos = 0, totalCreditos = 0, balance = 0;
+  let totalDebitos = 0,
+    totalCreditos = 0,
+    balance = 0;
   transacciones.forEach((t) => {
     const monto = parseFloat(t.monto) || 0;
     if (t.tipoMovimiento === "DB") {
@@ -53,7 +67,9 @@ function getDashboardData() {
   const activos = clientes.filter((c) => c.estado === "Activo").length;
   const docActivos = documentos.filter((d) => d.estado === "Activo").length;
   const asientosNuevos = asientos.filter((a) => a.estado === "Nuevo").length;
-  const asientosAnulados = asientos.filter((a) => a.estado === "Anulado").length;
+  const asientosAnulados = asientos.filter(
+    (a) => a.estado === "Anulado"
+  ).length;
 
   const ultimasTransacciones = [...transacciones]
     .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
@@ -72,7 +88,7 @@ function getDashboardData() {
     totalDebitos,
     totalCreditos,
     ultimasTransacciones,
-    clientesLista: clientes
+    clientesLista: clientes,
   };
 }
 
@@ -121,38 +137,55 @@ function cargarVistaDashboard() {
           <div class="stat-card-icon"><i class="fas fa-users"></i></div>
           <div class="stat-card-body">
             <span class="stat-card-label">Clientes</span>
-            <span class="stat-card-value" id="dash-clientes">${data.clientes}</span>
-            <span class="text-muted" style="font-size:0.8rem;">${data.clientesActivos} activos</span>
+            <span class="stat-card-value" id="dash-clientes">${
+              data.clientes
+            }</span>
+            <span class="text-muted" style="font-size:0.8rem;">${
+              data.clientesActivos
+            } activos</span>
           </div>
         </div>
         <div class="stat-card stat-card-secondary">
           <div class="stat-card-icon"><i class="fas fa-exchange-alt"></i></div>
           <div class="stat-card-body">
             <span class="stat-card-label">Transacciones</span>
-            <span class="stat-card-value" id="dash-transacciones">${data.transacciones}</span>
+            <span class="stat-card-value" id="dash-transacciones">${
+              data.transacciones
+            }</span>
           </div>
         </div>
         <div class="stat-card stat-card-accent">
           <div class="stat-card-icon"><i class="fas fa-balance-scale"></i></div>
           <div class="stat-card-body">
             <span class="stat-card-label">Balance total</span>
-            <span class="stat-card-value stat-card-currency" id="dash-balance">RD$ ${data.balance.toLocaleString("es-DO", { minimumFractionDigits: 2 })}</span>
+            <span class="stat-card-value stat-card-currency" id="dash-balance">RD$ ${data.balance.toLocaleString(
+              "es-DO",
+              { minimumFractionDigits: 2 }
+            )}</span>
           </div>
         </div>
         <div class="stat-card stat-card-primary">
           <div class="stat-card-icon"><i class="fas fa-file-alt"></i></div>
           <div class="stat-card-body">
             <span class="stat-card-label">Tipos de documento</span>
-            <span class="stat-card-value" id="dash-documentos">${data.documentos}</span>
-            <span class="text-muted" style="font-size:0.8rem;">${data.documentosActivos} activos</span>
+            <span class="stat-card-value" id="dash-documentos">${
+              data.documentos
+            }</span>
+            <span class="text-muted" style="font-size:0.8rem;">${
+              data.documentosActivos
+            } activos</span>
           </div>
         </div>
         <div class="stat-card stat-card-secondary">
           <div class="stat-card-icon"><i class="fas fa-book"></i></div>
           <div class="stat-card-body">
             <span class="stat-card-label">Asientos</span>
-            <span class="stat-card-value" id="dash-asientos">${data.asientos}</span>
-            <span class="text-muted" style="font-size:0.8rem;">${data.asientosNuevos} nuevos · ${data.asientosAnulados} anulados</span>
+            <span class="stat-card-value" id="dash-asientos">${
+              data.asientos
+            }</span>
+            <span class="text-muted" style="font-size:0.8rem;">${
+              data.asientosNuevos
+            } nuevos · ${data.asientosAnulados} anulados</span>
           </div>
         </div>
       </div>
@@ -162,15 +195,25 @@ function cargarVistaDashboard() {
         <div class="summary-row">
           <div class="summary-item">
             <span class="summary-item-label">Total débitos (DB):</span>
-            <span class="summary-item-value positive">RD$ ${data.totalDebitos.toLocaleString("es-DO", { minimumFractionDigits: 2 })}</span>
+            <span class="summary-item-value positive">RD$ ${data.totalDebitos.toLocaleString(
+              "es-DO",
+              { minimumFractionDigits: 2 }
+            )}</span>
           </div>
           <div class="summary-item">
             <span class="summary-item-label">Total créditos (CR):</span>
-            <span class="summary-item-value negative">RD$ ${data.totalCreditos.toLocaleString("es-DO", { minimumFractionDigits: 2 })}</span>
+            <span class="summary-item-value negative">RD$ ${data.totalCreditos.toLocaleString(
+              "es-DO",
+              { minimumFractionDigits: 2 }
+            )}</span>
           </div>
           <div class="summary-item">
             <span class="summary-item-label">Balance:</span>
-            <span class="summary-item-value ${data.balance >= 0 ? "positive" : "negative"}">RD$ ${data.balance.toLocaleString("es-DO", { minimumFractionDigits: 2 })}</span>
+            <span class="summary-item-value ${
+              data.balance >= 0 ? "positive" : "negative"
+            }">RD$ ${data.balance.toLocaleString("es-DO", {
+    minimumFractionDigits: 2,
+  })}</span>
           </div>
         </div>
       </div>
@@ -232,10 +275,15 @@ function cargarVistaDashboard() {
       tr.innerHTML = `
         <td><strong>${t.id}</strong></td>
         <td>${t.fecha}</td>
-        <td><span class="badge ${isDb ? "bg-primary" : "bg-success"}">${t.tipoMovimiento}</span></td>
+        <td><span class="badge ${isDb ? "bg-primary" : "bg-success"}">${
+        t.tipoMovimiento
+      }</span></td>
         <td>${t.tipoDocumento} ${t.numeroDocumento}</td>
         <td>${nombreCliente}</td>
-        <td class="text-end">${signo} RD$ ${parseFloat(t.monto).toLocaleString("es-DO", { minimumFractionDigits: 2 })}</td>
+        <td class="text-end">${signo} RD$ ${parseFloat(t.monto).toLocaleString(
+        "es-DO",
+        { minimumFractionDigits: 2 }
+      )}</td>
       `;
       tbody.appendChild(tr);
     });
@@ -246,15 +294,19 @@ function cargarVistaConsultas() {
   const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
   const transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
 
-  const balancePorCliente = clientes.map((c) => {
-    let balance = 0;
-    transacciones.filter((t) => t.clienteId === c.id).forEach((t) => {
-      const monto = parseFloat(t.monto) || 0;
-      if (t.tipoMovimiento === "DB") balance += monto;
-      else balance -= monto;
-    });
-    return { id: c.id, nombre: c.nombre, balance };
-  }).filter((b) => b.balance !== 0 || true);
+  const balancePorCliente = clientes
+    .map((c) => {
+      let balance = 0;
+      transacciones
+        .filter((t) => t.clienteId === c.id)
+        .forEach((t) => {
+          const monto = parseFloat(t.monto) || 0;
+          if (t.tipoMovimiento === "DB") balance += monto;
+          else balance -= monto;
+        });
+      return { id: c.id, nombre: c.nombre, balance };
+    })
+    .filter((b) => b.balance !== 0 || true);
 
   const contenido = document.getElementById("contenido");
   contenido.innerHTML = `
@@ -283,13 +335,8 @@ function cargarVistaConsultas() {
         <div class="section-stats" id="consultas-resumen-stats"></div>
       </div>
 
-      <div class="welcome-card">
-        <i class="fas fa-search welcome-icon"></i>
-        <div>
-          <h3>Consultas y reportes</h3>
-          <p>Utilice la tabla "Balance por cliente" para revisar los saldos actuales. En futuras versiones se incorporarán reportes de antigüedad de saldos y movimientos por período exportables.</p>
-        </div>
-      </div>
+      <!-- Aquí se inyecta el módulo de consulta por criterios (consultas.js) -->
+      <div id="consulta-criterios-anchor"></div>
     </div>
   `;
 
@@ -300,16 +347,21 @@ function cargarVistaConsultas() {
     tr.innerHTML = `
       <td><strong>${item.id}</strong></td>
       <td>${item.nombre}</td>
-      <td class="text-end">RD$ ${item.balance.toLocaleString("es-DO", { minimumFractionDigits: 2 })}</td>
+      <td class="text-end">RD$ ${item.balance.toLocaleString("es-DO", {
+        minimumFractionDigits: 2,
+      })}</td>
     `;
     tbody.appendChild(tr);
   });
-  if (countEl) countEl.innerHTML = `Mostrando <strong>${balancePorCliente.length}</strong> clientes.`;
+  if (countEl)
+    countEl.innerHTML = `Mostrando <strong>${balancePorCliente.length}</strong> clientes.`;
 
   const resumen = document.getElementById("consultas-resumen-stats");
   if (resumen) {
     let totalBalance = 0;
-    balancePorCliente.forEach((b) => { totalBalance += b.balance; });
+    balancePorCliente.forEach((b) => {
+      totalBalance += b.balance;
+    });
     resumen.innerHTML = `
       <div class="section-stat">
         <div class="section-stat-icon primary"><i class="fas fa-users"></i></div>
@@ -326,13 +378,23 @@ function cargarVistaConsultas() {
         </div>
       </div>
       <div class="section-stat">
-        <div class="section-stat-icon ${totalBalance >= 0 ? "success" : "danger"}"><i class="fas fa-balance-scale"></i></div>
+        <div class="section-stat-icon ${
+          totalBalance >= 0 ? "success" : "danger"
+        }"><i class="fas fa-balance-scale"></i></div>
         <div>
           <span class="section-stat-label">Balance total</span>
-          <span class="section-stat-value">RD$ ${totalBalance.toLocaleString("es-DO", { minimumFractionDigits: 2 })}</span>
+          <span class="section-stat-value">RD$ ${totalBalance.toLocaleString(
+            "es-DO",
+            { minimumFractionDigits: 2 }
+          )}</span>
         </div>
       </div>
     `;
+  }
+
+  // Renderizar el módulo de consulta por criterios dentro del anchor
+  if (typeof ConsultasModulo !== "undefined") {
+    ConsultasModulo.cargarVista("consulta-criterios-anchor");
   }
 }
 
@@ -343,7 +405,10 @@ function actualizarDashboard() {
   const b = document.getElementById("dash-balance");
   if (c) c.textContent = data.clientes;
   if (t) t.textContent = data.transacciones;
-  if (b) b.textContent = "RD$ " + data.balance.toLocaleString("es-DO", { minimumFractionDigits: 2 });
+  if (b)
+    b.textContent =
+      "RD$ " +
+      data.balance.toLocaleString("es-DO", { minimumFractionDigits: 2 });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
