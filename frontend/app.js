@@ -294,17 +294,19 @@ function cargarVistaConsultas() {
   const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
   const transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
 
-  const balancePorCliente = clientes.map((c) => {
-    let balance = 0;
-    transacciones
-      .filter((t) => t.clienteId === c.id)
-      .forEach((t) => {
-        const monto = parseFloat(t.monto) || 0;
-        if (t.tipoMovimiento === "DB") balance += monto;
-        else balance -= monto;
-      });
-    return { id: c.id, nombre: c.nombre, balance };
-  });
+  const balancePorCliente = clientes
+    .map((c) => {
+      let balance = 0;
+      transacciones
+        .filter((t) => t.clienteId === c.id)
+        .forEach((t) => {
+          const monto = parseFloat(t.monto) || 0;
+          if (t.tipoMovimiento === "DB") balance += monto;
+          else balance -= monto;
+        });
+      return { id: c.id, nombre: c.nombre, balance };
+    })
+    .filter((b) => b.balance !== 0 || true);
 
   const contenido = document.getElementById("contenido");
   contenido.innerHTML = `
@@ -333,7 +335,7 @@ function cargarVistaConsultas() {
         <div class="section-stats" id="consultas-resumen-stats"></div>
       </div>
 
-      <!-- Aquí se inyecta el nuevo módulo de consulta por criterios -->
+      <!-- Aquí se inyecta el módulo de consulta por criterios (consultas.js) -->
       <div id="consulta-criterios-anchor"></div>
     </div>
   `;
